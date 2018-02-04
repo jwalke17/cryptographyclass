@@ -1,0 +1,105 @@
+
+%%%%%%%%% MASTER -- compiles the summary, description, and reference sections
+
+%%%\documentclass[11pt,onecolumn]{IEEEtran}
+
+\documentclass[10pt]{article}
+
+
+%\usepackage{course}
+\usepackage{pst-all,amssymb,amsmath,amsthm,cite,url,float}
+\usepackage[pdfpagelayout=OneColumn]{hyperref}
+
+%\usepackage[usenames, dvipsnames]{color}
+
+%\HideNotes
+
+
+%\def\handout{Written Assignment 01}  % Define the title of the document. For other parameters, plz see course.sty
+
+
+
+% Add space between paragraphs, no indents
+\setlength{\parskip}         {1ex plus 4pt minus 2pt}
+\setlength{\parindent}      {0em}
+
+% Add package for underline command \uline to work
+%\usepackage{ulem}
+
+% Set the document margins to conform to NSF standards
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{.25in}
+\setlength{\headsep}{.25in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+
+\begin{document}
+\bibliographystyle{IEEEtran}
+
+%The purpose of this document is to codify the logistics needed for students. This will be summarized in the first day of the class.
+
+
+
+
+\begin{center}
+	\textbf{CSE 40622 Cryptography, Spring 2018\\Written Assignment 01 (Lecture 01-02)}
+\end{center}
+
+
+Name: \textbf{Jasmine Walker}
+
+
+\begin{enumerate}
+	\item (10 pts) Calculate the remainders of these with the modulus 17. You can calculate modulo operations without finding $q,r$ explicitly.
+	\begin{enumerate}
+		\item $(38+17)\mod 17$
+		
+		\textbf{Answer:} \newline $(38+17)\mod 17$ = $55\mod 17$ = \textbf{4} \newline
+		\item $(11-82)\mod 17$
+		
+		\textbf{Answer:} \newline $(11-82)\mod 17$ = $-71\mod 17$ = \textbf{-14} \newline
+		\item $5\cdot 33\mod 17$
+		
+		\textbf{Answer:} \newline $5\cdot 33\mod 17$ = $165\mod 17$ = \textbf{12} \newline
+		\item $5\cdot 33^{-1}\mod 17$
+		
+
+		\begin{itemize}
+			\item Please find the multiplicative inverse modulo 17 for $33^{-1}$.
+		\end{itemize}
+		\textbf{Answer:} \newline $5\cdot 33^{-1}\mod 17$ = $((5\mod 17)\cdot (33^{-1}\mod 17))\mod 17$ \newline  $33\mod 17$ = $(34 - 1)\mod 17$ = $-1\mod 17$; \newline If we insert a := $33^{-1}\mod 17$, $(33\cdot a)\mod 17$ = $(-1\cdot a)\mod 17$ = 1 \newline By inspection of the second term, a = \textbf{16} \newline $((5\mod 17)\cdot (33^{-1}\mod 17))\mod 17$ = $(5\cdot 16)\mod 17$ = $80\mod 17$ = \textbf{12} \newline
+		
+		\item $8^3\mod 17$
+		
+		\textbf{Answer:} \newline $8^3\mod 17$ = $512\mod 17$ = \textbf{2} \newline
+	\end{enumerate}
+	
+	\item (10 pts) Prove or disprove the following proposition:
+	
+	Suppose $x,y,n$ are positive integers. If $x\equiv y\pmod n$ and $c$ is an integer that divides both $x$ and $y$ (\textit{i.e.,} $x/c$ and $y/c$ are integers), then we have
+	\begin{displaymath}
+	x/c\equiv y/c\pmod n
+	\end{displaymath}
+	
+	* Please allow yourself to recognize the division / while you answer this question (but you'll forget it completely again, right?).
+	
+	\textbf{Answer:} \newline Counterexample: \newline $15\equiv 3\ (\textrm{mod}\ 12)$; c = 3 \newline $(15/3)\not\equiv (3/3)\ (\textrm{mod}\ 12)$ \newline $5\not\equiv 1\ (\textrm{mod}\ 12)$ \newline \textbf{This proposition is false.} 
+	
+	\item (10 pts) Use the Euclidean algorithm to calculate the GCD of $17$ and $131$.
+	
+	\textbf{Answer:} \newline Euclidean algorithm : if $x = q\cdot d + r$, then gcd(x, d) = gcd(d, r) \newline 131 = $17\cdot 7 + 12$ \newline 17 = $1\cdot 12 + 5$ \newline 12 = $2\cdot 5 + 2$ \newline 5 = $2\cdot 2 + 1$ \newline 2 = $2\cdot 1 + 0$ \newline So, the GCD of $17$ and $131$ is \textbf{1}. \newline
+	
+	\item (10 pts) Use the extended Euclidean algorithm to calculate the multiplicative inverse $17^{-1}\mod 131$.
+	
+	\textbf{Answer:} \newline From above, \newline 131 = $17\cdot 7 + 12 \Rightarrow 12 = 131 - 17\cdot 7$ \newline $17 = 1\cdot 12 + 5 \Rightarrow 5 = 17 - 1\cdot 12$ \newline $12 = 2\cdot 5 + 2 \Rightarrow 2 = 12 - 2\cdot 5$ \newline $5 = 2\cdot 2 + 1 \Rightarrow 1 = 5 - 2\cdot 2$ \newline \newline $1 = 5 - 2(12 - 5(2)) = 12(-2) + 5(5)$ \newline $1 = 12(-2) + 5(17 - 1(12)) = 12(-7) + 17(5)$ \newline $1 = 17(5) + (131 - 17(7))(-7) = 131(-7) + 17(54)$ \newline So, $17^{-1}\mod 131$ = \textbf{54} \newline
+	
+	\item (10 pts) Use the squaring method discussed in the lecture to compute $137^{100}\mod 201$.
+	
+	\textbf{Answer:} \newline $137^{2}\mod 201$ = 76 \newline $137^{4}\mod 201$ = $((137^{2}\mod 201)\cdot (137^{2}\mod 201))\mod 201$ = 148 \newline $137^{8}\mod 201$ = $((137^{4}\mod 201)\cdot (137^{4}\mod 201))\mod 201$ = 196 \newline $137^{16}\mod 201$ = $((137^{8}\mod 201)\cdot (137^{8}\mod 201))\mod 201$ = 25 \newline $137^{32}\mod 201$ = $((137^{16}\mod 201)\cdot (137^{16}\mod 201))\mod 201$ = 22 \newline $137^{64}\mod 201$ = $((137^{32}\mod 201)\cdot (137^{32}\mod 201))\mod 201$ = 82 \newline \newline $137^{100}\mod 201$ = $((137^{64}\mod 201)\cdot (137^{32}\mod 201)\cdot (137^{4}\mod 201))\mod 201$ \newline = $(82\cdot 22\cdot 148)\mod 201$ = $266992\mod 201$ = \textbf{64}
+\end{enumerate}
+
+
+
+\end{document}
