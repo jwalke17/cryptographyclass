@@ -1,0 +1,111 @@
+
+%%%%%%%%% MASTER -- compiles the summary, description, and reference sections
+
+%%%\documentclass[11pt,onecolumn]{IEEEtran}
+
+\documentclass[10pt]{article}
+
+
+%\usepackage{course}
+\usepackage{pst-all,amssymb,amsmath,amsthm,cite,url,float}
+\usepackage[pdfpagelayout=OneColumn]{hyperref}
+
+%\usepackage[usenames, dvipsnames]{color}
+
+%\HideNotes
+
+
+%\def\handout{Written Assignment 01}  % Define the title of the document. For other parameters, plz see course.sty
+
+
+
+% Add space between paragraphs, no indents
+\setlength{\parskip}         {1ex plus 4pt minus 2pt}
+\setlength{\parindent}      {0em}
+
+% Add package for underline command \uline to work
+%\usepackage{ulem}
+
+% Set the document margins to conform to NSF standards
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{.25in}
+\setlength{\headsep}{.25in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+
+\begin{document}
+\bibliographystyle{IEEEtran}
+
+%The purpose of this document is to codify the logistics needed for students. This will be summarized in the first day of the class.
+
+
+
+
+\begin{center}
+	\textbf{CSE 40622 Cryptography, Spring 2018\\Written Assignment 02 (Lecture 03-05)}
+\end{center}
+
+
+Name: \textbf{Jasmine Walker}
+
+
+
+\begin{enumerate}
+	\item (15 pts, page 5) Prove Fermat's Little Theorem when $x$ is not a positive integer without using Euler's Theorem.
+	\begin{itemize}
+		\item Follow the proof in page 5 in the note for Lecture 03-05, but consider that $x$ is either 0 or negative.
+	\end{itemize}
+
+\textbf{Answer:} \newline \textbf{Case 1: $x=0$} \newline If $x=0$, then $0^{p}\equiv 0\pmod p$ for any $p$ \newline \newline \textbf{Case 2: $x \epsilon \mathbb{Z}^{-}$} \newline If $x \epsilon \mathbb{Z}^{-}$, $x = -1 - 1 - 1 ...$ for as many 1's as x. So, for all $x$ in $\mathbb{Z}$, \newline $x^{p}\equiv(\sum_{n = 1}^{x}-1)^{p}\equiv(\sum_{n = 1}^{x}(-1)^{p})\equiv(\sum_{n = 1}^{x}-1)\equiv x\pmod p$ \newline Note that $(-1)^{p}$ is always $-1$ because $p$ is a prime.
+	
+	
+	\bigskip\item (\textbf{Hard}, 15 pts, page 5) If $p$ in Fermat's Little Theorem is not a prime number, the first step of its proof may not hold any more. Explain this with a special case where $p=q^2$ and $q$ is a prime number.
+	\begin{itemize}
+		\item Binomial theorem states
+		\begin{displaymath}
+		(x+y)^p=\binom{p}{0}x^py^0+\binom{p}{1}x^{p-1}y^1+\binom{p}{2}x^{p-2}y^2+\cdots +\binom{p}{p-1}x^1y^{p-1}+\binom{p}{p}x^0y^p
+		\end{displaymath}
+		
+		Is it true that $(x+y)^p\mod p=x^p+y^p$ even though $p=q^2$?
+		\item Look at the terms $\binom{p}{q},\binom{p}{q+1},\binom{p}{q+2},\cdots$ and see whether they are ALL multiples of $p$.
+		\item For example, $\binom{p}{3}=\frac{q^2(q^2-1)(q^2-2)}{3\cdot 2}$. $q^2$ cannot be divided by 2 or 3 (since $q$ is prime), and $\binom{p}{3}$ must be an integer. Then, $\frac{(q^2-1)(q^2-2)}{3\cdot 2}$ must be an integer factor. Therefore, $\binom{p}{3}$ must be a multiple of $p$, and $\binom{p}{3}\mod p=0$. The same theory applies to $\binom{p}{4},\binom{p}{5},\binom{p}{6},\cdots$ all the way up to $\binom{p}{q-1}$.
+	\end{itemize}
+
+\textbf{Answer:} \newline $\binom{p}{q} = \binom{q^2}{q} = \frac{(q^2)(q^2-1)...(q^2-q+1)}{(q)(q-1)...(2)} = (q)\frac{(q^2-1)...(q^2-q+1)}{(q-1)...(2)}$ \newline This shows that $\binom{p}{q}$ is some factor of $q$, but not necessarily some factor of $q^2 = p$. There are some cases (ex. when $p=4$, $q=2$, $x=9$, $y=5$) where $(x + y)^p\not\equiv (x^p + y^p)\pmod p$ (ex. $(9 + 5)^4\not\equiv (9^4 + 5^4)\pmod 4$).
+
+	\bigskip\item (10 pts, page 4 \& 5) Use Euler's Theorem to prove Fermat's Little Theorem.
+	\begin{itemize}
+		\item There are two cases: when $\gcd(x,p)=1$ and when $\gcd(x,p)\neq 1$.
+	\end{itemize}
+
+\textbf{Answer:} \newline \textbf{Case 1: $\gcd(x,p)=1$} \newline When $\gcd(x,p)=1$, then $x^{\varphi(p)}\equiv 1\pmod p$. Multiplying both sides by x, \newline $(x^{\varphi(p)}\cdot x)\equiv (1\cdot x)\pmod p$ \newline $x^{\varphi(p)+1}\equiv x\pmod p$ \newline Since $p$ is prime, \newline $x^{(p-1)+1}\equiv x\pmod p$ \newline $x^{p}\equiv x\pmod p$ \newline \newline \newline \textbf{Case 2: $\gcd(x,p)\neq 1$} \newline If $p$ is prime and $\gcd(x,p)\neq 1$, then $x$ must be some multiple of $p$. If this is the case, then $x\mod p = 0$. For any $p\epsilon\mathbb{Z}$, $x^p\equiv x\equiv 0\pmod p$. \newline
+
+	\bigskip\item Suppose we have strong attackers as follows. Describe how he/she can universally break the RSA encryption.
+
+
+** Anyone has access to the public key by default.
+\begin{enumerate}
+	\item (10 pts, page 7) The attacker can do the factoring of $n=pq$. That is, he/she can figure out $p$ and $q$ from $n=pq$.
+	
+	\textbf{Answer:} \newline The attacker has $n$ from the public key and $e$ from the public key. The attacker can find $p$ and $q$ from the public key $n$. Then, the attacker can find $\varphi(n)=(p-1)(q-1)$, which is trivial if the attacker can find $p$ and $q$ from $n$. The attacker can find $d$, the private key, from this information by computing the inverse of $e \mod\varphi(n)$. The hacker can then decrypt any cipher given by computing $c^d \mod n = m$, which is the decryption algorithm. \newline
+	\bigskip\item (10 pts, page 8) The attacker can somehow calculate $\varphi(n)$ from $n$.
+	
+	\textbf{Answer:} \newline If the attacker can figure out $\varphi(n)$ from $n$, then the answer is similar to the one above: Given the public key $n$ and $e$, the attacker can find $\varphi(n)$, which means the attacker can find $d=e^{-1}\mod \varphi(n)$. Since $d$ is the private key, the attacker can decrypt any cipher encrypted by the public keys by computing $c^d \mod n = m$.
+\end{enumerate}
+
+\bigskip\item (15 pts) Assuming that the factoring of $n=pq$ is hard. Explain why it is hard to infer $m$ in RSA by performing the $e$-th root modulo $n$ as follows, given that $e$ is a public parameter.
+\begin{displaymath}
+\sqrt[e]{c}\mod n=c^{\frac{1}{e}}\mod n=(m^e)^{e^{-1}}\mod n=m^{e\cdot e^{-1}}\mod n=m^1\mod n=m
+\end{displaymath}
+\textbf{Answer:} \newline While it is easy to determine $e^{-1}\mod n$, raising $c$ to $e^{-1}$ would not necessarily result in $m$. Consider, \newline $c^{e^{-1}}\equiv m^{e\cdot e^{-1}}\equiv m^{kn+1}\pmod n$ for some integer $k$ \newline In order for $m^{kn+1}=m$, $m^{kn}$ must equal $1$. But we cannot guarantee that $m^{kn}=1$. Instead of multiplying by the modular multiplicative inverse of $e\mod n$, we should multiply by the modular multiplicative inverse of $e\mod \varphi(n)$, which results in $m$ due to Euler's Theorem: \newline $c^{e^{-1}}\equiv m^{e\cdot e^{-1}}\equiv m^{k\varphi(n)+1}\equiv m^{k\varphi(n)}m^{1}\equiv m\pmod n$
+
+\bigskip\item (10 pts, page 6) The RSA encryption requires that $m$ to be a positive number. Explain why $m$ should not be 0.
+
+\textbf{Answer:} \newline If $m$ were 0, the ciphertext $c$ of $m$ will be 0 no matter what the public or private key is, meaning that an attacker can infer the message $m$ from the ciphertext $c$. Which is not ideal.
+\end{enumerate}
+
+
+
+\end{document}

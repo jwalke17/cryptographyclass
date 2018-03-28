@@ -1,0 +1,101 @@
+
+%%%%%%%%% MASTER -- compiles the summary, description, and reference sections
+
+%%%\documentclass[11pt,onecolumn]{IEEEtran}
+
+\documentclass[10pt]{article}
+
+
+%\usepackage{course}
+\usepackage{pst-all,amssymb,amsmath,amsthm,cite,url,float}
+\usepackage[pdfpagelayout=OneColumn]{hyperref}
+
+%\usepackage[usenames, dvipsnames]{color}
+
+%\HideNotes
+
+
+%\def\handout{Written Assignment 01}  % Define the title of the document. For other parameters, plz see course.sty
+
+\newcommand{\setup}{\mathsf{Setup}}
+\newcommand{\gen}{\mathsf{KeyGen}}
+\newcommand{\enc}{\mathsf{Enc}}
+\newcommand{\dec}{\mathsf{Dec}}
+\newcommand{\param}{\mathsf{param}}
+\newcommand{\pk}{\mathsf{pk}}
+\newcommand{\sk}{\mathsf{sk}}
+\newcommand{\adv}{\mathsf{Adv}}
+
+
+% Add space between paragraphs, no indents
+\setlength{\parskip}         {1ex plus 4pt minus 2pt}
+\setlength{\parindent}      {0em}
+
+% Add package for underline command \uline to work
+%\usepackage{ulem}
+
+% Set the document margins to conform to NSF standards
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{.25in}
+\setlength{\headsep}{.25in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+
+\begin{document}
+\bibliographystyle{IEEEtran}
+
+%The purpose of this document is to codify the logistics needed for students. This will be summarized in the first day of the class.
+
+
+
+
+\begin{center}
+	\textbf{CSE 40622 Cryptography, Spring 2018\\Written Assignment 05 (Lecture 14)}
+\end{center}
+
+
+Name: \textbf{Jasmine Walker}
+
+
+
+
+
+
+\begin{enumerate}
+	
+	\item (20 pts) Formally define the second pre-image resistance and pre-image resistance of hash functions by
+	designing a game and showing the relationship between the adversary's advantage and a negligible function
+	of the security parameter. In other words, try to mimic what I did in Definition 2.
+	
+	\textbf{Answer:} \newline 
+    For second pre-image resistance, the game is:
+    \begin{itemize}
+    \item The challenger chooses the security parameter $1^k$ and a seed $s\leftarrow KeyGen(1^k)$ for some key generation function $KeyGen$. The challenger also chooses some $x$. The challenger publishes $1^k$, $s$, and $x$.
+    \item The adversary chooses a $x'$ which does not equal $x$.
+    \end{itemize}
+    If for all PPTA $\mathcal{A}$ there exists some negligible function $negl(k)$ such that the following is true, we say $H(.,.)$ is second pre-image resistant.
+    \begin{displaymath}
+    Adv^{\mathcal{A}}_{secpre} = Pr[H(x,s)=H(x',s)|x\ne x', x'\leftarrow \mathcal{A}(1^k,s)]\le negl(k)
+    \end{displaymath}
+    where $Adv^{\mathcal{A}}_{secpre}$ denotes the adversary's advantage.
+    \newline
+    \newline
+    For pre-image resistance, the game is:
+    \begin{itemize}
+    \item The challenger chooses the security parameter $1^k$ and a seed $s\leftarrow KeyGen(1^k)$ for some key generation function $KeyGen$. The challenger also chooses some $x$ and computes $H(x,s)$. The challenger publishes $1^k$, $s$, and $H(x,s)$.
+    \item The adversary chooses a $x'$.
+    \end{itemize}
+    If for all PPTA $\mathcal{A}$ there exists some negligible function $negl(k)$ such that the following is true, we say $H(.,.)$ is pre-image resistant.
+    \begin{displaymath}
+    Adv^{\mathcal{A}}_{pre} = Pr[H(x,s)=H(x',s)|x'\leftarrow \mathcal{A}(1^k,s)]\le negl(k)
+    \end{displaymath}
+    where $Adv^{\mathcal{A}}_{pre}$ denotes the adversary's advantage.
+    
+	
+\end{enumerate}
+
+
+
+\end{document}
